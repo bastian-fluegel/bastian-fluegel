@@ -3,636 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bastian-fluegel.de | Wartungsmodus</title>
+    <title>Bastian Flügel | Software-Architektur & Digitale Souveränität</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* =========================================
-           VARIABLES & RESET - Apple-Style Premium
-           ========================================= */
-        :root {
-            --black: #000000;
-            --white: #ffffff;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-600: #4b5563;
-            --gray-900: #111827;
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --accent: #0033aa;
-            --warning: #f59e0b;
-            --warning-bg: #fffbeb;
-            --warning-border: #fcd34d;
-        }
-        
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: var(--gray-50);
-            color: var(--gray-900);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            -webkit-font-smoothing: antialiased;
-            line-height: 1.7;
-        }
-        
-        /* =========================================
-           US HOSTING BANNER
-           ========================================= */
-        .hosting-banner {
-            background: var(--warning-bg);
-            border-bottom: 1px solid var(--warning-border);
-            padding: 0.75rem 1rem;
-            text-align: center;
-            font-size: 0.8125rem;
-            color: var(--gray-900);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .hosting-banner-icon {
-            font-size: 1rem;
-        }
-        
-        .hosting-banner-text {
-            display: inline;
-        }
-        
-        .hosting-banner-link {
-            color: var(--primary);
-            text-decoration: underline;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        
-        .hosting-banner-link:hover {
-            color: var(--primary-hover);
-        }
-        
-        /* =========================================
-           MAIN LAYOUT
-           ========================================= */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 4rem 2rem;
-        }
-        
-        .container {
-            max-width: 600px;
-            width: 100%;
-            background: var(--white);
-            padding: 4rem;
-            border-radius: 24px;
-            border: 1px solid var(--gray-100);
-            box-shadow: 
-                0 1px 3px rgba(0, 0, 0, 0.05),
-                0 20px 60px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            
-            /* Fade-in Animation */
-            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* =========================================
-           BRANDING
-           ========================================= */
-        .logo {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: var(--gray-900);
-            margin-bottom: 0.5rem;
-        }
-        
-        .logo-subtitle {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--gray-600);
-            font-weight: 500;
-            margin-bottom: 2rem;
-        }
-        
-        /* =========================================
-           STATUS BADGE
-           ========================================= */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-            color: white;
-            padding: 0.5rem 1.25rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 3rem;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
-            
-            /* Subtle pulse animation */
-            animation: pulse 3s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { 
-                box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3); 
-            }
-            50% { 
-                box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5); 
-            }
-        }
-        
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #fff;
-            border-radius: 50%;
-            animation: blink 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-        
-        /* =========================================
-           TYPOGRAPHY
-           ========================================= */
-        h1 {
-            font-size: clamp(1.75rem, 5vw, 2.5rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            color: var(--gray-900);
-        }
-        
-        .lead {
-            font-size: 1.125rem;
-            color: var(--gray-600);
-            font-weight: 400;
-            line-height: 1.7;
-            max-width: 450px;
-            margin: 0 auto;
-        }
-        
-        /* =========================================
-           CONTACT BOX
-           ========================================= */
-        .contact-box {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--gray-100);
-        }
-        
-        .contact-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gray-600);
-            margin-bottom: 0.75rem;
-            font-weight: 500;
-        }
-        
-        .contact-links {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .contact-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.125rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            background: rgba(37, 99, 235, 0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .contact-link:hover {
-            background: rgba(37, 99, 235, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        .contact-link svg {
-            width: 20px;
-            height: 20px;
-        }
-        
-        .contact-link.linkedin {
-            font-size: 1rem;
-            padding: 0.5rem 1.25rem;
-            background: transparent;
-            color: var(--gray-600);
-        }
-        
-        .contact-link.linkedin:hover {
-            background: rgba(37, 99, 235, 0.05);
-            color: var(--primary);
-        }
-        
-        /* =========================================
-           PROGRESS INDICATOR
-           ========================================= */
-        .progress-section {
-            margin-top: 3rem;
-            padding: 1.5rem;
-            background: var(--gray-50);
-            border-radius: 16px;
-        }
-        
-        .progress-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gray-600);
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-        
-        .progress-bar {
-            height: 6px;
-            background: var(--gray-100);
-            border-radius: 999px;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            width: 75%;
-            background: linear-gradient(90deg, var(--primary), #60a5fa);
-            border-radius: 999px;
-            animation: progressPulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes progressPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        /* =========================================
-           FOOTER
-           ========================================= */
-        footer {
-            padding: 2rem;
-            text-align: center;
-            font-size: 0.8125rem;
-            color: var(--gray-600);
-        }
-        
-        .copyright {
-            margin-bottom: 1rem;
-        }
-        
-        .legal-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-        
-        .legal-links a {
-            color: var(--gray-600);
-            text-decoration: none;
-            transition: color 0.2s;
-            font-weight: 500;
-        }
-        
-        .legal-links a:hover {
-            color: var(--gray-900);
-        }
-        
-        /* =========================================
-           LEGAL SECTIONS (Modal-Style)
-           ========================================= */
-        .legal-section {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .legal-section:target {
-            display: flex;
-            opacity: 1;
-        }
-        
-        .legal-content {
-            background: var(--white);
-            max-width: 600px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 3rem;
-            border-radius: 24px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
-            text-align: left;
-            position: relative;
-            animation: modalIn 0.3s ease;
-        }
-        
-        @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-        
-        .legal-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--gray-100);
-            color: var(--gray-600);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 1.25rem;
-            transition: all 0.2s;
-        }
-        
-        .legal-close:hover {
-            background: var(--gray-900);
-            color: var(--white);
-        }
-        
-        .legal-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            color: var(--gray-900);
-            padding-right: 3rem;
-        }
-        
-        .legal-content p {
-            font-size: 0.9375rem;
-            color: var(--gray-600);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-        
-        .legal-content strong {
-            color: var(--gray-900);
-            font-weight: 600;
-        }
-        
-        .legal-highlight {
-            background: var(--warning-bg);
-            border: 1px solid var(--warning-border);
-            border-radius: 12px;
-            padding: 1.25rem;
-            margin: 1.5rem 0;
-        }
-        
-        .legal-highlight p {
-            margin-bottom: 0;
-            font-size: 0.875rem;
-        }
-        
-        /* =========================================
-           RESPONSIVE
-           ========================================= */
-        @media (max-width: 600px) {
-            .main-content {
-                padding: 2rem 1rem;
-            }
-            
-            .container {
-                padding: 2.5rem 1.5rem;
-                border-radius: 20px;
-            }
-            
-            .legal-content {
-                padding: 2rem 1.5rem;
-                border-radius: 20px;
-                max-height: 90vh;
-            }
-            
-            .legal-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .hosting-banner {
-                font-size: 0.75rem;
-                padding: 0.625rem 0.75rem;
-            }
-        }
-        
-        /* =========================================
-           REDUCED MOTION
-           ========================================= */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .gradient-bg { background: radial-gradient(circle at top right, #1e293b, #0f172a); }
+        .card-blur { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .tech-pill { background: rgba(59, 130, 246, 0.1); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2); }
     </style>
 </head>
-<body>
+<body class="bg-[#0b0f1a] text-slate-200 antialiased">
 
-    <!-- US Hosting Hinweis Banner -->
-    <div class="hosting-banner">
-        <span class="hosting-banner-icon">&#9432;</span>
-        <span class="hosting-banner-text">
-            Diese Seite wird auf GitHub Pages (USA) gehostet.
-            <a href="#us-hosting" class="hosting-banner-link">Was bedeutet das?</a>
-        </span>
-    </div>
+    <nav class="fixed w-full z-50 border-b border-white/5 bg-[#0b0f1a]/80 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-extrabold tracking-tighter text-white">BASTIAN<span class="text-blue-500">FLÜGEL</span></div>
+            <a href="#anfrage" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-full font-bold text-sm transition shadow-lg shadow-blue-500/20">Projekt starten</a>
+        </div>
+    </nav>
 
-    <div class="main-content">
-        <div class="container">
-            <div class="logo">Bastian Flügel</div>
-            <div class="logo-subtitle">Architekt für Digitale Sicherheit</div>
-            
-            <div class="status-badge">
-                <span class="status-dot"></span>
-                Under Construction
-            </div>
-            
-            <h1>Bald wieder da.</h1>
-            <p class="lead">
-                Ich überarbeite derzeit meinen Webauftritt – 
-                mit dem gleichen Qualitätsanspruch, den ich auch an meine Security-Arbeit stelle.
+    <section class="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div class="container mx-auto max-w-5xl text-center relative z-10">
+            <span class="inline-block py-1 px-3 rounded-full tech-pill text-xs font-bold mb-6 tracking-widest uppercase">PWA + Python Backend</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-8 leading-[1.1]">
+                EIGENE SOFTWARE. <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">KEIN ABO-ZWANG.</span>
+            </h1>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+                Verabschiede dich von starren Excel-Dateien und teuren Cloud-Abos. Ich entwickle deine maßgeschneiderte Web-App (PWA) mit sicherem Python-Backend auf deinem eigenen Server.
             </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#architektur" class="bg-white text-slate-900 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-slate-200 transition shadow-xl">Wie es funktioniert</a>
+                <a href="#anfrage" class="border border-white/10 hover:bg-white/5 text-white px-8 py-4 rounded-2xl font-bold text-lg transition">Potenzial-Check</a>
+            </div>
+        </div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-[120px] -z-10"></div>
+    </section>
 
-            <div class="progress-section">
-                <div class="progress-label">Fortschritt</div>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
+    <section id="architektur" class="py-24 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid lg:grid-cols-3 gap-8">
+                
+                <div class="card-blur p-8 rounded-[2.5rem] flex flex-col hover:border-blue-500/50 transition">
+                    <div class="text-4xl mb-6">📱</div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Modernes UI (PWA)</h3>
+                    <p class="text-slate-400 mb-8 flex-grow">Deine App fühlt sich an wie eine installierte Anwendung auf dem Handy oder PC. Schnell, intuitiv und 100% responsive.</p>
+                    <div class="flex flex-wrap gap-2 text-[10px] font-bold">
+                        <span class="px-2 py-1 rounded bg-white/5">MOBILE FIRST</span>
+                        <span class="px-2 py-1 rounded bg-white/5">OFFLINE READY</span>
+                    </div>
+                </div>
+
+                <div class="card-blur p-8 rounded-[2.5rem] border-blue-500/30 ring-1 ring-blue-500/20 flex flex-col shadow-2xl shadow-blue-500/5">
+                    <div class="text-4xl mb-6">⚙️</div>
+                    <h3 class="text-2xl font-bold text-white mb-4 text-blue-400">Python Intelligence</h3>
+                    <p class="text-slate-400 mb-8 flex-grow">Hochleistungs-Berechnungen, automatische PDF-Generierung (E-Rechnung/ZUGFeRD) und maximale Sicherheit auf deinem VPS in Deutschland.</p>
+                    <div class="flex flex-wrap gap-2 text-[10px] font-bold">
+                        <span class="px-2 py-1 rounded bg-blue-500/20 text-blue-400 text-xs">DATEN-SOUVERÄNITÄT</span>
+                    </div>
+                </div>
+
+                <div class="card-blur p-8 rounded-[2.5rem] flex flex-col hover:border-emerald-500/50 transition">
+                    <div class="text-4xl mb-6">🚀</div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Smart Export</h3>
+                    <p class="text-slate-400 mb-8 flex-grow">Die App arbeitet für dich. Exportiere Daten jederzeit nach Excel für die Buchhaltung oder spiegel sie optional in Google Docs.</p>
+                    <div class="flex flex-wrap gap-2 text-[10px] font-bold">
+                        <span class="px-2 py-1 rounded bg-white/5">EXCEL / CSV</span>
+                        <span class="px-2 py-1 rounded bg-white/5">GOOGLE API</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 bg-white/5">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-extrabold text-white text-center mb-16 italic">"Excel-Horror adé."</h2>
+            <div class="space-y-12">
+                <div class="flex gap-8 items-start">
+                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 font-bold text-blue-400">01</div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-2 uppercase tracking-wide">E-Rechnung (Gesetzlich Pflicht 2025)</h4>
+                        <p class="text-slate-400">Erstellung von XRechnung & ZUGFeRD direkt aus der App. Rechtssicher, blitzschnell und ohne mühsame Makros.</p>
+                    </div>
+                </div>
+                <div class="flex gap-8 items-start">
+                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 font-bold text-blue-400">02</div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-2 uppercase tracking-wide">Mobile Materialerfassung</h4>
+                        <p class="text-slate-400">Keine Zettel mehr auf der Baustelle. Deine Mitarbeiter erfassen alles per Handy-Kamera oder Dropdown – die Zentrale sieht es live.</p>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="contact-box">
-                <div class="contact-label">Dringende Anfragen?</div>
-                <div class="contact-links">
-                    Die Adresse kontakt@bastian-fluegel.de wird aktuell gewartet
-                    <a href="mailto:bastian.fluegel@mail.de" class="contact-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                        </svg>
-                        bastian.fluegel@mail.de
-                    </a>
-                    <a href="https://linkedin.com/in/bastian-fluegel/" target="_blank" rel="noopener noreferrer" class="contact-link linkedin">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                        LinkedIn
-                    </a>
+    <section id="anfrage" class="py-24 px-6">
+        <div class="container mx-auto max-w-xl">
+            <div class="card-blur p-10 rounded-[3rem] shadow-2xl">
+                <h3 class="text-2xl font-bold text-white mb-2 text-center">Digitale Strategie-Session</h3>
+                <p class="text-slate-500 text-center mb-10 text-sm">Ich analysiere deinen Workflow und zeige dir den Weg zu deiner eigenen Software.</p>
+                <form class="space-y-4">
+                    <input type="text" placeholder="Name" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 focus:border-blue-500 outline-none transition text-white font-medium">
+                    <input type="email" placeholder="E-Mail" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 focus:border-blue-500 outline-none transition text-white font-medium">
+                    <textarea placeholder="Welchen Excel-Prozess möchtest du befreien?" rows="4" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 focus:border-blue-500 outline-none transition text-white font-medium"></textarea>
+                    <button class="w-full bg-blue-600 text-white py-5 rounded-2xl font-extrabold text-xl shadow-xl shadow-blue-500/20 hover:bg-blue-500 transition uppercase tracking-widest">Projekt starten</button>
+                </form>
+                <div class="mt-8 text-center text-[10px] text-slate-500 uppercase font-bold tracking-[0.2em]">
+                    Bastian Flügel | Souveräne Software | Kleinunternehmer gem. § 19 UStG
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Impressum Modal -->
-    <div id="impressum" class="legal-section">
-        <div class="legal-content">
-            <a href="#" class="legal-close">×</a>
-            <h3>Impressum</h3>
-            <p>
-                <strong>Anbieterkennzeichnung gemäß § 5 DDG:</strong>
-            </p>
-            <p>
-                Bastian Flügel<br>
-                Schubertstraße 3<br>
-                84144 Geisenhausen<br>
-                Germany
-            </p>
-            <p>
-                <strong>Kontakt:</strong><br>
-                E-Mail: kontakt@bastian-fluegel.de
-            </p>
-        </div>
-    </div>
-
-    <!-- Datenschutz Modal -->
-    <div id="datenschutz" class="legal-section">
-        <div class="legal-content">
-            <a href="#" class="legal-close">×</a>
-            <h3>Datenschutzerklärung</h3>
-            <p>
-                <strong>1. Verantwortlicher</strong><br>
-                Verantwortlich für die Datenverarbeitung auf dieser Webseite ist Bastian Flügel (Kontakt siehe Impressum).
-            </p>
-            <p>
-                <strong>2. Hosting (GitHub Pages)</strong><br>
-                Diese Webseite wird bei GitHub Inc. (88 Colin P. Kelly Jr St, San Francisco, CA 94107, USA) gehostet. 
-                Wenn Sie diese Seite aufrufen, werden technische Log-Daten (z. B. IP-Adresse, Datum/Uhrzeit des Abrufs, Browsertyp) 
-                von GitHub erhoben, um die Sicherheit und Stabilität des Dienstes zu gewährleisten. 
-                Dies erfolgt auf Grundlage unseres berechtigten Interesses gemäß Art. 6 Abs. 1 lit. f DSGVO.
-            </p>
-            <div class="legal-highlight">
-                <p>
-                    <strong>Hinweis zum US-Hosting:</strong> GitHub ist ein US-amerikanisches Unternehmen. 
-                    Ein angemessenes Datenschutzniveau wird durch das EU-US Data Privacy Framework gewährleistet, 
-                    unter dem GitHub zertifiziert ist.
-                </p>
-            </div>
-            <p>
-                <strong>3. Keine Cookies & Tracking</strong><br>
-                Diese Webseite verwendet keine Cookies und keine Tracking-Tools. 
-                Es werden keine personenbezogenen Daten zu Analysezwecken erhoben.
-            </p>
-        </div>
-    </div>
-
-    <!-- US-Hosting Info Modal -->
-    <div id="us-hosting" class="legal-section">
-        <div class="legal-content">
-            <a href="#" class="legal-close">×</a>
-            <h3>Hinweis zum US-Hosting</h3>
-            <p>
-                <strong>Warum wird diese Seite in den USA gehostet?</strong><br>
-                Diese temporäre "Under Construction"-Seite wird über GitHub Pages bereitgestellt – 
-                ein kostenloser und zuverlässiger Dienst von GitHub Inc. mit Sitz in den USA.
-            </p>
-            <div class="legal-highlight">
-                <p>
-                    <strong>Transparenz ist mir wichtig:</strong> Als Security-Spezialist weiß ich, 
-                    dass US-Hosting datenschutzrechtliche Fragen aufwirft. Deshalb hier die Fakten:
-                </p>
-            </div>
-            <p>
-                <strong>Was bedeutet das für Ihre Daten?</strong><br>
-                Beim Aufruf dieser Seite werden technische Daten (IP-Adresse, Browsertyp, Zeitstempel) 
-                von GitHub-Servern in den USA verarbeitet. Dies ist technisch unvermeidbar und erfolgt 
-                auf Basis meines berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO).
-            </p>
-            <p>
-                <strong>Wie ist das DSGVO-konform?</strong><br>
-                GitHub ist unter dem EU-US Data Privacy Framework zertifiziert. 
-                Dieses Framework wurde von der EU-Kommission als angemessenes Schutzniveau anerkannt 
-                und ermöglicht rechtmäßige Datenübertragungen in die USA.
-            </p>
-            <p>
-                <strong>Meine finale Website</strong><br>
-                Die vollständige bastian-fluegel.de wird auf deutschen Servern (Hetzner, Gunzenhausen) 
-                gehostet – ohne US-Datenübertragung, mit A+ Security-Rating und strikter DSGVO-Compliance.
-            </p>
-            <p style="margin-top: 2rem; font-size: 0.8125rem; color: var(--gray-600);">
-                Fragen? Schreiben Sie mir: <a href="mailto:kontakt@bastian-fluegel.de" style="color: var(--primary);">kontakt@bastian-fluegel.de</a>
-            </p>
-        </div>
-    </div>
-
-    <footer>
-        <div class="copyright">© 2026 Bastian Flügel</div>
-        <div class="legal-links">
-            <a href="#impressum">Impressum</a>
-            <a href="#datenschutz">Datenschutz</a>
-        </div>
+    <footer class="py-12 text-center text-slate-600 text-xs font-bold border-t border-white/5">
+        &copy; 2026 BASTIAN FLÜGEL | <a href="#" class="hover:text-blue-500">IMPRESSUM</a> | <a href="#" class="hover:text-blue-500">DATENSCHUTZ</a>
     </footer>
 
 </body>
